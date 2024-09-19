@@ -18,21 +18,46 @@ data("penguins", package = "palmerpenguins")
 glimpse(penguins)
 ```
 
-This dataset contains information about the penguin characteristics listed below.
+**Describing the Data**
 
-| Variable | Unit | Data Type |
-|-----|-----|-----|
-| Species | NA |  Factor |
-| Island | NA |  Factor |
-| Bill Length | mm |  Double |
-| Bill Depth | mm |  Double |
-| Flipper Length | mm |  Integer |
-| Body Mass | g |  Integer |
-| Sex | NA |  Factor |
-| Year | NA |  Integer |
+The `penguins` dataset has `r nrow(penguins)` rows and `r ncol(penguins)` columns, and contains information about the penguin characteristics listed below.
+
+```{r get_range_str, echo=FALSE, message=FALSE}
+get_range_str = function(x_list){
+  output = paste("_Range:_ ", min(x_list, na.rm = TRUE), " to ", max(x_list, na.rm = TRUE))
+  return(output)
+}
+```
+
+| Variable | Unit | Data Type | Values |
+|-----|-----|-----|-----|
+| Species | NA |  Factor | `r levels(pull(penguins, species))` |
+| Island | NA |  Factor | `r levels(pull(penguins, island))` |
+| Bill Length | mm |  Double |  `r get_range_str(pull(penguins, bill_length_mm))` |
+| Bill Depth | mm |  Double | `r get_range_str(pull(penguins, bill_depth_mm))` |
+| Flipper Length | mm |  Integer | `r get_range_str(pull(penguins, flipper_length_mm))` |
+| Body Mass | g |  Integer | `r get_range_str(pull(penguins, body_mass_g))` |
+| Sex | NA |  Factor | `r levels(pull(penguins, sex))` |
+| Year | NA |  Integer | `r get_range_str(pull(penguins, year))` |
 
 
-The `penguins` dataset contains `r nrow(penguins)` rows and `ncol(penguins)` columns. 
+**Calculating Mean Flipper Length**
+
+```{r}
+mean_flipper_length = 
+  pull(penguins, flipper_length_mm) |> 
+  mean(na.rm = TRUE) |> 
+  round(2)
+
+```
+
+The mean flipper length among the penguins in the dataset is `r mean_flipper_length` mm.
+
+**Scatterplot of Flipper Length vs Bill Length**
+
+
+
+
 
 
 
