@@ -9,3 +9,30 @@ output: github_document
 library(tidyverse)
 ```
 
+
+## Problem 1
+
+Loading the penguins dataset and getting a `glimpse` of it.
+```{r}
+data("penguins", package = "palmerpenguins")
+glimpse(penguins)
+```
+
+This dataset contains information about the penguin characteristics listed below.
+
+| Variable | Unit | Data Type |
+|-----|-----|-----|
+| Species | NA |  Factor |
+| Island | NA |  Factor |
+| Bill Length | mm |  Double |
+| Bill Depth | mm |  Double |
+| Flipper Length | mm |  Integer |
+| Body Mass | g |  Integer |
+| Sex | NA |  Factor |
+| Year | NA |  Integer |
+
+
+The `penguins` dataset contains `r nrow(penguins)` rows and `ncol(penguins)` columns. 
+
+
+
