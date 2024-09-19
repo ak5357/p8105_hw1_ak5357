@@ -7,12 +7,13 @@ output: github_document
 
 ```{r setup, echo=FALSE, message=FALSE}
 library(tidyverse)
+library(ggplot2)
 ```
 
 
 ## Problem 1
 
-Loading the penguins dataset and getting a `glimpse` of it.
+**Loading the penguins dataset and getting a `glimpse` of it.**
 ```{r}
 data("penguins", package = "palmerpenguins")
 glimpse(penguins)
@@ -43,7 +44,7 @@ get_range_str = function(x_list){
 
 **Calculating Mean Flipper Length**
 
-```{r}
+```{r mean_flipper_length}
 mean_flipper_length = 
   pull(penguins, flipper_length_mm) |> 
   mean(na.rm = TRUE) |> 
@@ -54,6 +55,60 @@ mean_flipper_length =
 The mean flipper length among the penguins in the dataset is `r mean_flipper_length` mm.
 
 **Scatterplot of Flipper Length vs Bill Length**
+
+```{r scatterplot, warning = FALSE}
+ggplot(penguins, aes(x = flipper_length_mm, y = bill_length_mm, color = species)) + 
+  geom_point() + 
+  labs(title = "Flipper Length (mm) vs. Bill Length (mm)",
+       x = "Bill Length (mm)",
+       y = "Flipper Length (mm)",
+       color = "Species"
+       )
+```
+
+
+**Save Scatterplot to Project Directory**
+```{r save_plot, warning = FALSE}
+ggsave(filename = "penguins_scatterplot.png")
+```
+
+# Problem 2
+
+**Create a dataframe**
+```{r sample_dataframe}
+df = tibble(
+  norm_sample = rnorm(10),
+  greater_than_0 = norm_sample > 0,
+  char = stringi::stri_rand_strings(10, 1, pattern = "[a-z]"),
+  fac = factor(sample(c("bird", "cat", "dog"), size = 10, replace = TRUE))
+)
+
+df
+```
+
+**Taking the mean of each variable**
+```{r}
+mean(pull(df, norm_sample))
+
+mean(pull(df, greater_than_0))
+
+mean(pull(df, char))
+
+mean(pull(df, fac))
+```
+
+Taking the mean of my variables results in numeric values for the first two columns, `norm_samp` and `greater_than_0`, and warning messages for the latter columns, `char` and `fac`.
+
+This exercise and the warning messages above demonstrate that the `mean()` function can only be used on numeric or logical vectors. Applying the `mean()` function
+
+
+
+For the `norm_samp` column, as expected the output value is the arithmetic mean of the numeric values in the column. For `greater_than_0`, the output value is a probabilistic mean, showing what proportion of the column's values are `TRUE`. Both `char` and `fac` have an output of `NA` because their arguments are not numeric or logical.
+
+
+
+
+
 
 
 
