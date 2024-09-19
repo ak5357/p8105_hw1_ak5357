@@ -1,0 +1,11 @@
+---
+title: "Data Science Homework 1"
+author: "ak5357"
+date: "2024-09-19"
+output: github_document
+---
+
+```{r setup, echo=FALSE, message=FALSE}
+library(tidyverse)
+```
+
