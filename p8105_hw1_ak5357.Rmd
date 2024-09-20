@@ -21,7 +21,7 @@ glimpse(penguins)
 
 **Describing the Data**
 
-The `penguins` dataset has `r nrow(penguins)` rows and `r ncol(penguins)` columns, and contains information about the penguin characteristics listed below.
+The `penguins` dataset has `r nrow(penguins)` rows and `r ncol(penguins)` columns, and contains information about the attributes listed below.
 
 ```{r get_range_str, echo=FALSE, message=FALSE}
 get_range_str = function(x_list){
@@ -87,7 +87,7 @@ df
 ```
 
 **Taking the mean of each variable**
-```{r}
+```{r mean_function}
 mean(pull(df, norm_sample))
 
 mean(pull(df, greater_than_0))
@@ -97,22 +97,27 @@ mean(pull(df, char))
 mean(pull(df, fac))
 ```
 
-Taking the mean of my variables results in numeric values for the first two columns, `norm_samp` and `greater_than_0`, and warning messages for the latter columns, `char` and `fac`.
-
-This exercise and the warning messages above demonstrate that the `mean()` function can only be used on numeric or logical vectors. Applying the `mean()` function
+This exercise and the warning messages above demonstrate that the `mean()` function can only be used on numeric or logical vectors. Applying the `mean()` function on the `norm_samp` or `greater_than_0` columns yields their arithmetic and probabilistic means, respectively. However, applying the `mean()` function on either `char` or `fac` yields an output of `NA`, since the values in those columns are neither numeric nor logical.
 
 
+```{r as_numeric, eval = FALSE}
+as.numeric(pull(df, norm_sample))
 
-For the `norm_samp` column, as expected the output value is the arithmetic mean of the numeric values in the column. For `greater_than_0`, the output value is a probabilistic mean, showing what proportion of the column's values are `TRUE`. Both `char` and `fac` have an output of `NA` because their arguments are not numeric or logical.
+as.numeric(pull(df, greater_than_0))
 
+as.numeric(pull(df, char))
 
+as.numeric(pull(df, fac))
+```
 
+When I pass each column through the `as.numeric()` function, the output is as follow:
 
+* `norm_sample`: This column does not appear to change at all, since the values are already numeric.
 
+* `greater_than_0`: All `TRUE` values are converted to `1`, and all `FALSE` values are converted to `0`.
 
+* `char`: Returns an array of `NA` values.
 
+* `fac`: Each factor is converted to either `1`, `2`, or `3` based on their order when I defined them.
 
-
-
-
-
+This explains what happens when we pass numeric, logical, or character arrays into the `mean()` function. However, in my opinion, it does not explain why we receive a `NA` value when passing an array of factors to the `mean()` function.
