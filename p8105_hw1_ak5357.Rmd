@@ -25,21 +25,26 @@ The `penguins` dataset has `r nrow(penguins)` rows and `r ncol(penguins)` column
 
 ```{r get_range_str, echo=FALSE, message=FALSE}
 get_range_str = function(x_list){
-  output = paste("_Range:_ ", min(x_list, na.rm = TRUE), " to ", max(x_list, na.rm = TRUE))
+  output = paste(
+    "_Range:_ ",
+    min(x_list, na.rm = TRUE),
+    " to ",
+    max(x_list, na.rm = TRUE)
+    )
   return(output)
 }
 ```
 
-| Variable | Unit | Data Type | Values |
-|-----|-----|-----|-----|
-| Species | NA |  Factor | `r levels(pull(penguins, species))` |
-| Island | NA |  Factor | `r levels(pull(penguins, island))` |
-| Bill Length | mm |  Double |  `r get_range_str(pull(penguins, bill_length_mm))` |
-| Bill Depth | mm |  Double | `r get_range_str(pull(penguins, bill_depth_mm))` |
-| Flipper Length | mm |  Integer | `r get_range_str(pull(penguins, flipper_length_mm))` |
-| Body Mass | g |  Integer | `r get_range_str(pull(penguins, body_mass_g))` |
-| Sex | NA |  Factor | `r levels(pull(penguins, sex))` |
-| Year | NA |  Integer | `r get_range_str(pull(penguins, year))` |
+| Variable | Column Name | Unit | Data Type | Values |
+|-----|-----|-----|-----|-----|
+| Species | species | N/A |  Factor | `r levels(pull(penguins, species))` |
+| Island | island | N/A |  Factor | `r levels(pull(penguins, island))` |
+| Bill Length | bill_length_mm | mm |  Double |  `r get_range_str(pull(penguins, bill_length_mm))` |
+| Bill Depth | bill_depth_mm | mm |  Double | `r get_range_str(pull(penguins, bill_depth_mm))` |
+| Flipper Length | flipper_length_mm | mm |  Integer | `r get_range_str(pull(penguins, flipper_length_mm))` |
+| Body Mass | body_mass_g | g |  Integer | `r get_range_str(pull(penguins, body_mass_g))` |
+| Sex | sex | N/A |  Factor | `r levels(pull(penguins, sex))` |
+| Year | year | N/A |  Integer | `r get_range_str(pull(penguins, year))` |
 
 
 **Calculating Mean Flipper Length**
@@ -120,4 +125,4 @@ When I pass each column through the `as.numeric()` function, the output is as fo
 
 * `fac`: Each factor is converted to either `1`, `2`, or `3` based on their order when I defined them.
 
-This explains what happens when we pass numeric, logical, or character arrays into the `mean()` function. However, in my opinion, it does not explain why we receive a `NA` value when passing an array of factors to the `mean()` function.
+This explains what happens when we pass numeric, logical, or character arrays into the `mean()` function. However, in my opinion, it does not directly explain why we receive a `NA` value when passing an array of factors to the `mean()` function.
